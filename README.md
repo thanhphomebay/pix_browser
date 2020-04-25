@@ -1,6 +1,17 @@
+
+
 # Pix
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.5.
+
+## Nodejs express
+
+1. npm install express
+2. create pix/ directory at the same level as the server.js
+3. copy pictures folder into pix directory
+4. inside each directory pix/a pix/b -- generate json files with the same name as directories: pix/a/a.json pix/b/b.json 
+5. for f in `ls pix/*`; do echo  {\"id\" : \""$f"\", \"txt\": \"pix of anna\" }, ; done > delete.json
+
 
 ## Development server
 

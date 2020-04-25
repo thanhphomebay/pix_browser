@@ -1,0 +1,33 @@
+<div [style.background]="'red'" *ngIf="errMsg$|async as errMsg">{{errMsg}}</div>
+<button mat-button color="primary" (click)="next()">Next</button>
+<button mat-button color="primary" (click)="prev()">Prev</button>
+<!--
+Meme: {{(src$|async)?.memeName}} PixSrc: {{(src$|async)?.memeState?.urls[(src$|async)?.memeState?.idx].id}}
+-->
+
+<div (swipeleft)="next()" (swiperight)="prev()" *ngIf="src$|async as src">
+    <ng-container 
+        *ngIf="isPix((src)?.memeState?.urls[(src)?.memeState?.idx]?.id); then ispicture; else ismovie">
+    </ng-container>
+    <ng-template #ispicture>
+
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>{{(src)?.memeState?.urls[(src)?.memeState?.idx]?.txt}}</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="{{prefix+((src)?.memeState?.urls[(src)?.memeState?.idx]?.id)}}">
+        </mat-card>
+
+    </ng-template>
+
+    <ng-template #ismovie>
+        <video id="videoPlayer" controls>
+            <source src={{prefix+((src)?.memeState?.urls[(src)?.memeState?.idx]?.id)}} type="video/mp4">
+        </video>
+    </ng-template>
+
+
+
+</div>
+
+<app-spinner [overlay]="true" *ngIf="isLoading$|async"></app-spinner>
